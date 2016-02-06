@@ -1,0 +1,24 @@
+{
+  "options" : {
+    "debug_mode" : false,
+    "prefer_ex1" : true,
+    "output_dir" : "..",
+    "pretty_print_effects" : true,
+    "indent" : 2
+  },
+  "modinfo" : {
+    "context" : "client",
+    "identifier" : "com.pa.domdom.tele_landing",
+    "display_name" : "Tele Landing",
+    "description" : "A Sup-com style commander landing effect.",
+    "author" : "dom314",
+    "forum" : "https://forums.uberent.com/threads/rel-client-more-pew-pew.69229/",
+    "icon" : "http://i.imgur.com/PQOpc3u.gif",
+    "product" : ["Titans"],
+    "version" : "0.0.1",
+    "priority": 100
+  },
+  "mod" : [
+    { "from_script" : "/tele_landing.py" }
+  ]
+}

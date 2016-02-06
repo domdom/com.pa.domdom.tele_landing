@@ -1,0 +1,23 @@
+{
+  "label": "initial soft flare",
+  "spec": {
+    "shader": "particle_add",
+    "facing": "EmitterZ",
+    "red": 0.2,
+    "green": 0.1,
+    "blue": 5,
+    "alpha": [[0, 1], [1, 0]],
+    "sizeX": [[0, 0.5], [0.5, 1], [1, 0.7]],
+    "cameraPush": 0.02,
+    "baseTexture": "/pa/effects/textures/particles/eclipse.papa"
+  },
+  "sizeX": 60,
+  "emissionBursts": 1,
+  "maxParticles": 3,
+  "rotationRange": 3.1416,
+  "rotationRateRange": 1,
+  "lifetime": 6,
+  "delay" : 0,
+  "bLoop": false,
+  "endDistance": 2000
+}

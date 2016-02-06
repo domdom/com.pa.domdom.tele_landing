@@ -1,0 +1,23 @@
+{
+    "spec": {
+        "shader": "meshParticle_add",
+        "shape": "mesh",
+        "facing": "EmitterZ",
+        "red": [[0, 1 ], [0.35, 1 ] ],
+        "green": [[0, 1 ], [0.35, 1 ] ],
+        "blue": [[0, 1 ], [0.35, 20 ] ],
+        "alpha": [[0, 1 ], [0.8, 0.5], [1, 0]],
+        "size": [[0, 0 ], [0.1, 0.5 ], [0.2, 1 ], [0.3, 0.87 ], [0.4, 0.7 ], [1, 0 ]],
+        "papa": "/pa/effects/fbx/particles/sphere_ico16seg.papa",
+        "materialProperties": {
+            "Texture": "/pa/effects/textures/particles/flat.papa"
+        }
+    },
+    "offsetZ" : 3,
+    "sizeX": 5,
+    "sizeY": 5,
+    "lifetime": 6,
+    "emissionBursts": 1,
+    "bLoop": false,
+    "endDistance": -1
+}

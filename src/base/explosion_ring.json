@@ -1,0 +1,21 @@
+{
+  "label": "sound sync explosion ring",
+  "spec": {
+    "shader": "particle_add",
+    "facing": "EmitterZ",
+    "red": 0.2,
+    "green": 0.5,
+    "blue": 5,
+    "alpha": [[0, 1], [1, 0]],
+    "sizeX": [[0, 0.5], [0.5, 1], [1, 2]],
+    "cameraPush": 0.02,
+    "baseTexture": "/pa/effects/textures/particles/simpleExplosionRing.papa"
+  },
+  "sizeX": 40,
+  "maxParticles" : 100,
+  "rotationRange": 3.1416,
+  "lifetime": 1.6,
+  "delay" : 1.8,
+  "bLoop": false,
+  "endDistance": 2000
+}

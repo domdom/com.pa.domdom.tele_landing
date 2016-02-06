@@ -1,0 +1,26 @@
+{
+  "spec": {
+    "shader": "meshParticle_fresnel_ramp_add",
+    "shape": "mesh",
+    "red": 0.1,
+    "green": 0.1,
+    "blue": 1,
+    "alpha": [[0,5],[0.015,4.8],[0.02875,4.05],[0.04375,2.2],[0.04875,0.2],[0.065,3.8],[0.07875,4.5],[0.08875,4.9],[0.09375,0.25],[0.10375,4.9],[0.11,1.15],[0.11625,3],[0.12375,2.1],[0.12875,4.8],[0.13625,4.45],[0.1375,4.7],[0.14125,4.9],[0.1525,4.5],[0.15625,4.8],[0.1625,4.5],[0.17,4.9],[0.1775,4.5],[0.20625,4.6],[0.205,5],[0.21375,4.95],[0.2175,4.7],[0.2225,3.6],[0.22375,4.55],[0.235,4.7],[0.24125,4.95],[0.2475,4.7],[0.2625,4.6],[0.2725,3.85],[0.27875,4.65],[0.28375,4.7],[0.28875,4.9],[0.29125,4.75],[1,0]],
+    "size" : [[0, 0], [0.1, 0.4], [0.2, 0.6], [0.27, 1], [0.8, 0.9], [1, 0]],
+    "papa": "/pa/effects/fbx/particles/sphere_ico16seg.papa",
+    "materialProperties": {
+      "Texture": "/pa/effects/textures/particles/uncompressed/fresnel_horizon.papa",
+      "Ramp": "/pa/effects/textures/particles/uncompressed/fresnel_ramp.papa"
+    }
+  },
+  "offsetZ": 3.0,
+  "sizeX": 20,
+  "lifetime": 5,
+  "rotation": 5,
+  "maxParticles": 1,
+  "emitterLifetime": 2.0,
+  "killOnDeactivate": true,
+  "bLoop": false,
+  "delay" : 0.4,
+  "endDistance": -1
+}
