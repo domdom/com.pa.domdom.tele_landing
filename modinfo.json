@@ -1,7 +1,7 @@
 {
     "context": "client",
     "identifier": "com.pa.domdom.tele_landing",
-    "display_name": "Tele Landing",
+    "display_name": "Commander Tele Landing",
     "description": "A sup-com style commander teleport effect.",
     "author": "dom314",
     "forum": "https://forums.uberent.com/threads/rel-client-commander-tele-landing.71360/",
@@ -14,7 +14,7 @@
         "in-game",
         "effects"
     ],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "priority": 100,
     "build": "89755",
     "date": "2016/02/06"
