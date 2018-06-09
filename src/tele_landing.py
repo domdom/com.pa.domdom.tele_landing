@@ -3,18 +3,22 @@ import loader
 import pajson
 
 import math
-import copy 
+import copy
 import random
 import colorsys
 
 false = False
 true = True
 
-base_pointlight = pajson.loadf("base/pointlight.json")
-base_orb = pajson.loadf("base/orb.json")
-base_outer_orb = pajson.loadf("base/outer_orb.json")
+def load_json(path):
+	with open(path, 'r') as f:
+		return pajson.load(f)
 
-initial_orb = pajson.loadf("base/initial_orb.json")
+base_pointlight = load_json("base/pointlight.json")
+base_orb = load_json("base/orb.json")
+base_outer_orb = load_json("base/outer_orb.json")
+
+initial_orb = load_json("base/initial_orb.json")
 
 total_time = 7.0;
 
@@ -38,16 +42,16 @@ base_orb['delay'] = 0.7 + 0.5 / base_orb['emissionRate']
 # base_orb['emitterLifetime'] = 3
 base_orb['red'], base_orb['green'], base_orb['blue'] = (0.6 , 0.5, 10)
 
-light_flecks = pajson.loadf("base/light_flecks.json")
+light_flecks = load_json("base/light_flecks.json")
 
-base_sparks = pajson.loadf("base/sparks.json")
+base_sparks = load_json("base/sparks.json")
 
 effects.append(base_orb)
 effects.append(base_outer_orb)
 effects.append(light_flecks)
 effects.append(base_sparks)
 
-explosion = pajson.loadf("base/explosion.json")
+explosion = load_json("base/explosion.json")
 
 
 for effect in explosion:
@@ -56,13 +60,13 @@ explosion[1]["delay"] = 5.1
 
 effects = effects
 
-effects += pajson.loadf("base/first_explosion_ring.json")
+effects += load_json("base/first_explosion_ring.json")
 
 
-initial_smoke_wave = pajson.loadf("base/initial_smoke_wave.json")
+initial_smoke_wave = load_json("base/initial_smoke_wave.json")
 effects.append(initial_smoke_wave)
 
-initial_flare = pajson.loadf("base/initial_flare.json")
+initial_flare = load_json("base/initial_flare.json")
 effects.append(initial_flare)
 
 flare2 = copy.deepcopy(initial_flare)
@@ -102,7 +106,7 @@ effects.append(landing_light)
 
 bright_flash_1 = copy.deepcopy(landing_light)
 
-bright_flash_1["lifetime"] = 0.3 
+bright_flash_1["lifetime"] = 0.3
 bright_flash_1["spec"]["size"] = [[0, 1], [1, 0]]
 bright_flash_1["spec"]["red"] = 0.7
 bright_flash_1["spec"]["green"] = 1
@@ -112,7 +116,7 @@ effects.append(bright_flash_1)
 
 effects.append(flare2)
 
-strobe_rings = pajson.loadf("base/explosion_ring.json")
+strobe_rings = load_json("base/explosion_ring.json")
 
 
 strobe_rings["emissionRate"] = [[0, 0.1], [3, 5]]
@@ -146,7 +150,7 @@ def run():
 	# effect = {
 	# "emitters" : explosion
 	# }
-	
+
 	return pajson.loads("""[
 		{
 			"target" : "/pa/effects/specs/default_commander_landing_ent.json",
