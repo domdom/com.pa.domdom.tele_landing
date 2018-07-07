@@ -1,0 +1,13 @@
+{
+  "context" : "client",
+  "identifier" : "com.pa.domdom.tele_landing",
+  "display_name" : "Commander Tele Landing",
+  "description" : "A sup-com style commander teleport effect.",
+  "author" : "dom314",
+  "forum" : "https://forums.uberent.com/threads/rel-client-commander-tele-landing.71360/",
+  "icon" : "http://i.imgur.com/EP4JqNg.gif?3",
+  "product" : ["Titans", "Classic"],
+  "category": ["in-game", "effects"],
+  "version" : "1.2.0",
+  "priority": 100
+}

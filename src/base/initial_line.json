@@ -1,0 +1,46 @@
+[
+    {
+        "spec": {
+            "shader": "particle_transparent",
+            "facing": "EmitterZ",
+            "size": [[0, 1], [1, 0]],
+            "red": 4,
+            "green": 0,
+            "blue": 0,
+            "baseTexture": "/pa/effects/textures/particles/ring.papa"
+        },
+        "offsetZ": 2,
+        "sizeX": 20,
+        "emissionBursts": 1,
+        "lifetime": 0.5,
+        "emitterLifetime": 2,
+        "bLoop": false,
+        "sort": "NoSort",
+        "endDistance": -1
+    },
+    {
+        "spec": {
+            "shader": "particle_transparent",
+            "facing": "AxialZ",
+            "polyAdjustCenter": -0.5,
+            "sizeX": [ [ 0.5, 1 ], [ 1, 0 ] ],
+            "sizeY": [ [ 0, 0 ], [ 0.5, 1 ] ],
+            "red": [ [ 0.0, 4 ], [ 0.5, 1 ] ],
+            "green": 0,
+            "blue": 0,
+            "temp_alpha": [ [ 0.5, 1 ], [ 1, 0 ] ],
+            "baseTexture": "/pa/effects/textures/particles/flat.papa"
+        },
+        "sizeX": 1,
+        "sizeY": 900,
+        "emissionBursts": {
+            "time": 0.5,
+            "count": 1
+        },
+        "lifetime": 1,
+        "emitterLifetime": 2,
+        "bLoop": false,
+        "sort": "NoSort",
+        "endDistance": -1
+    }
+]

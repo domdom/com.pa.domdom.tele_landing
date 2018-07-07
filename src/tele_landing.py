@@ -1,7 +1,4 @@
-import utils
-import loader
-import pajson
-
+from pa_tools.pa import pajson
 import math
 import copy
 import random
@@ -11,8 +8,11 @@ false = False
 true = True
 
 def load_json(path):
-	with open(path, 'r') as f:
-		return pajson.load(f)
+	obj, w = pajson.loadf(path)
+	for warning in w:
+		print(warning)
+
+	return obj
 
 base_pointlight = load_json("base/pointlight.json")
 base_orb = load_json("base/orb.json")
@@ -134,6 +134,176 @@ super_bright_flash["offsetZ"] = 50
 
 effects.append(super_bright_flash)
 
+initial_line = load_json("base/initial_line.json")
+
+
+big_spark_base = {
+      "spec": {
+        "shader": "particle_transparent",
+        "shape": "beam",
+        "alpha": [ [ 0.5, 1 ], [ 0.55, 0.25 ], [ 1, 0 ] ],
+        "sizeX": [ [ 0, 0.25 ], [ 0.2, 3.5 ], [ 0.5, 1 ] ],
+        "baseTexture": "/pa/effects/textures/particles/flat.papa"
+      },
+      "useWorldSpace": true,
+      "offsetRangeX": [ [ 0, 0 ], [ 0.01, 3 ], [ 0.7, 3 ], [ 1, 0.5 ] ],
+      "offsetRangeZ": [ [ 0, 0 ], [ 0.01, 3 ], [ 0.7, 3 ], [ 1, 0.5 ] ],
+      "offsetRangeY": [ [ 0, 0 ], [ 0.01, 3 ], [ 0.7, 3 ], [ 1, 0.5 ] ],
+      "velocityRangeX": [ [ 0, 0 ], [ 0.01, 1 ], [ 0.7, 1 ], [ 1, 2 ] ],
+      "velocityRangeZ": [ [ 0, 0 ], [ 0.01, 1 ], [ 0.7, 1 ], [ 1, 2 ] ],
+      "velocityRangeY": [ [ 0, 0 ], [ 0.01, 0.1 ], [ 0.7, 0.1 ], [ 1, 0 ] ],
+      "velocityRange": 1,
+      "offsetZ": [ [ 0, 0 ], [ 1, 900 ] ],
+      "red": 2,
+      "green": 1.6,
+      "blue": 80,
+      "sizeX": [ [ 0, 0.08 ], [ 0.5, 0.08 ], [ 1, 0 ] ],
+      "sizeRangeX": 0.08,
+      "emissionBursts": 1,
+      "maxParticles": 30,
+      "lifetime": [ [ 0, 0.8 ], [0.5, 0.5], [ 0.9, 0.3 ], [1, 0] ],
+      "emitterLifetime": 1,
+      "bLoop": false,
+      "endDistance": 6000
+    }
+
+
+def create_sparks():
+  num = 40
+  start = 2
+  duration = 3
+  for i in range(0, num):
+    big_spark = copy.deepcopy(big_spark_base)
+
+    big_spark['delay'] = 2 + math.sqrt(9 - ((i/25 - 3))**2)
+    if (i % 2) == 0:
+      effects.append(big_spark)
+
+create_sparks()
+
+def create_tunnel():
+  tunnel = {
+      "spec": {
+        "shader": "particle_transparent",
+        "shape": "rectangle",
+        "facing": "velocity",
+        "alpha": [ [ 0, 0 ], [ 0.05, 0.25 ], [0.5, 1], [ 1, 1 ] ],
+        "sizeY" : [[0, 0.05], [0.8, 0.09], [1, 1]],
+        "polyAdjustCenter": -0.5,
+        "sizeX": 0.4,
+        "sizex" : [[0, 0.4], [0.8, 0.4], [1, 1]],
+        "baseTexture": "/pa/effects/textures/particles/softdot.papa"
+      },
+      "type": "CYLINDER_Z",
+      "useWorldSpace": true,
+      "sizeY": 40,
+      "offsetX": 4,
+      "offsetY": 4,
+      "offsetRangeZ": [[0, 0], [3, 450]],
+      "velocity": -100,
+      "useRadialVelocityDir": true,
+      "offsetZ": [ [ 0, 900 ], [ 1, 450 ] ],
+      "red": 2,
+      "green": 5,
+      "blue": 20,
+      "emissionRate" : [[0.1, 0], [3, 10], [4, 200]],
+      "maxParticles": 300,
+      "lifetime" : [[0, 5], [5, 0]],
+      "emitterLifetime": 5,
+      "bLoop": false,
+      "delay": 0,
+      "endDistance": 6000
+    }
+  effects.append(tunnel)
+
+create_tunnel()
+
+
+
+def create_ring_tunnel():
+  ring = copy.deepcopy(strobe_rings)
+
+  duration = 0.2
+
+  ring["delay"] = 5 - duration
+
+  ring["emissionRate"] = 20 / duration
+
+  ring["red"] = [[0, 3], [duration / 2, 0.7]]
+  ring["green"] = [[0, 3], [duration / 2, 0.1]]
+  ring["blue"] = [[0, 5], [duration / 2, 5]]
+
+  ring["alpha"] = [[0, 0], [duration, 0.1]]
+  ring["offsetZ"] = [[0, 900], [duration, 10]]
+  ring["sizeX"] = [[0, 50], [duration * 2 / 3, 10], [duration, 9]]
+
+  ring["lifetime"] = 0.4
+
+  ring["spec"]["baseTexture"] = "/pa/effects/textures/particles/smooth_falloff_ring.papa"
+  ring["spec"]["sizeX"] = [[0, 0.1], [1, 2.5]]
+
+  ring["spec"]["red"] = 1.5
+  ring["spec"]["green"] = 1
+  ring["spec"]["blue"] = 5
+
+  effects.append(ring)
+
+create_ring_tunnel()
+
+
+def create_tunnel_sparks():
+
+  duration = 0.2
+  max_particles = 100
+
+  sparks = {
+    "spec" : {
+      "facing": "velocity",
+      "shader" : "particle_add_ramp",
+      "red" : 1,
+      "green" : 2,
+      "blue" : 30,
+      "alpha" : [[0, 10], [1, 0.5]],
+      "sizeX" : 1,
+      "sizeY" : [[0, 10], [0.2, 3], [0.4, 1.5], [1, 1]],
+      "rampV" : [[0, 0], [1, 1]],
+      "baseTexture" : "/pa/effects/textures/particles/dot.papa",
+      "rampTexture" : "/pa/effects/textures/particles/uncompressed/flicker_ramp.papa",
+      "dataChannelFormat" : "PositionColorAndAlignVector"
+    },
+    "type" : "SHELL",
+    "alpha": 0.1,
+    "rampRangeV" : 0.5,
+    "sizeX" : 0.2,
+    "sizeY" : [[0, 1], [duration, 0.2]],
+    "sizeRangeX" : 0.1,
+    "sizeRangeY" : 0.1,
+    "offsetRangeX" : 0.01,
+    "offsetRangeY" : 0.01,
+    "offsetRangeZ" : 0.01,
+    "offsetZ": [[0, 900], [duration, 0]],
+    "velocity" : [[0, -100], [duration, -10]],
+    "velocityRange" : [[0, 50], [duration, 5]],
+    "delay": 5 - duration,
+    "gravity": -4,
+    "drag" : 0.97,
+    "velocityZ": -1,
+    "lifetime" : 1,
+    "lifetimeRange" : 0.2,
+    "useRadialVelocityDir" : true,
+    # "offsetAllowNegZ" : false,
+    "emissionRate" : max_particles / duration,
+    "maxParticles": max_particles,
+    "emitterLifetime": duration * 1.5,
+    "endDistance" : -1,
+    "bLoop" : false
+  }
+
+  effects.append(sparks)
+
+create_tunnel_sparks()
+
+
 def run():
 	num_steps = 100;
 
@@ -151,19 +321,12 @@ def run():
 	# "emitters" : explosion
 	# }
 
-	return pajson.loads("""[
-		{
-			"target" : "/pa/effects/specs/default_commander_landing_ent.json",
+	return pajson.loads("""{
+			"target": "/pa/effects/specs/default_commander_landing.pfx",
 			"patch" : [
-				{"op": "replace", "path" : "/spawn_response/effect_spec", "value" : "/mod/tele_commander_landing.pfx"}
+				{"op": "replace", "path" : "", "value" : """ + pajson.dumps(effect) + """}
 			]
-		},
-		{
-			"target": "/pa/effects/specs/ping_ent.json",
-			"destination": "/mod/tele_commander_landing.pfx",
-			"patch" : [
-				{"op": "replace", "path" : "", "value" : """ + loader.dumps(effect) + """}
-			]
-		}
-		]
-		""");
+		}""")[0];
+
+if __name__ == '__main__':
+    import gen
