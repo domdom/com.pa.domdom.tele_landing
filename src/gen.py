@@ -41,7 +41,7 @@ def generate_mod():
 
     # create the base file system
     src = create_source_fs()
-    modinfo = load_json(src, '/src/modinfo.json')
+    modinfo = load_json(src, '/src/source_modinfo.json')
     modinfo = update_modinfo(modinfo)
 
     destination_path = os.path.join(out_dir, 'modinfo.json')
